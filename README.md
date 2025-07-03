@@ -57,9 +57,11 @@ cd _car_app
 ./mvnw spring-boot:run
 ```
 ### 2️⃣ Frontend (Angular)
+```bash
 cd _car_app_frontend
 npm install
 ng serve
+```
 
 ---
 
