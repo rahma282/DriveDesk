@@ -31,37 +31,3 @@ build/
 
 ### VS Code ###
 .vscode/
-
-application.properties
-.DS_Store
-Thumbs.db
-*.log
-
-_car_app/target/
-_car_app/.mvn/
-_car_app/mvnw
-_car_app/mvnw.cmd
-
-*.class
-*.jar
-*.war
-*.ear
-
-*.lombok
-
-_car_app/.classpath
-_car_app/.project
-_car_app/.settings/
-
-_car_app_frontend/node_modules/
-_car_app_frontend/dist/
-_car_app_frontend/.angular/
-_car_app_frontend/.env
-
-**/.env
-**/env.ts
-**/env.local.ts
-
-ehthumbs.db
-Icon?
-desktop.ini

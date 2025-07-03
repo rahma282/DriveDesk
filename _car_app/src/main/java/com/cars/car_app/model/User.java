@@ -1,7 +1,7 @@
 package com.cars.car_app.model;
 
-import java.util.List;   // JPA annotations like @Entity, @Id, @OneToMany
-import jakarta.persistence.*;
+import java.util.List;   
+import jakarta.persistence.*; // JPA annotations like @Entity, @Id, @OneToMany
 import lombok.*;  // Lombok annotations like @Data, @NoArgsConstructor
 
 @Entity //It will map to a table in the database named user by default
@@ -15,7 +15,7 @@ public class User {
     private Long id;
 
     @Column(unique = true)
-    private String username;
+    private String email;
 
     private String password;
 
@@ -23,5 +23,5 @@ public class User {
     private Role role;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Car> cars;  // cars listed by this user
+    private List<Reservation> reservations; // cars listed by this user
 }
