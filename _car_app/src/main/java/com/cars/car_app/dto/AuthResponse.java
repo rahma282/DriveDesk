@@ -5,10 +5,13 @@ import lombok.Data;
 
 @Data
 public class AuthResponse {
-     private String token;
+    private String token;
+
+    public AuthResponse() {
+    }
 
     public AuthResponse(String token) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        this.token = token;
     }
 
     public String getToken() {

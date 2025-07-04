@@ -21,6 +21,7 @@ public class AuthController {
 
     @PostMapping("/register")
     public User register(@RequestBody User user) {
+        // Password will be hashed inside saveUser
         return userService.saveUser(user);
     }
 
@@ -29,10 +30,14 @@ public class AuthController {
         User user = userService.getUserByEmail(request.getEmail())
                 .orElseThrow(() -> new RuntimeException("Invalid credentials"));
 
-        if (!user.getPassword().equals(request.getPassword())) {
+        // Check hashed password
+        boolean isPasswordMatch = userService.isPasswordValid(request.getPassword(), user.getPassword());
+
+        if (!isPasswordMatch) {
             throw new RuntimeException("Invalid credentials");
         }
 
+        // Generate JWT token
         String token = jwtUtil.generateToken(user.getEmail());
         return new AuthResponse(token);
     }
