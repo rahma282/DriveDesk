@@ -1,0 +1,231 @@
+<div class="auth-container">
+  <div class="container">
+    <div class="row justify-content-center align-items-center min-vh-100">
+      <div class="col-lg-6 col-md-8">
+        <div class="auth-card fade-in-up">
+          <div class="auth-header">
+            <div class="auth-logo">
+              <i class="fas fa-car-side"></i>
+              <span class="brand-text">DriveDesk</span>
+            </div>
+            <h2>Join DriveDesk</h2>
+            <p>Create your account to access exclusive vehicles</p>
+          </div>
+
+          <form (ngSubmit)="onRegister()" #registerForm="ngForm" class="auth-form">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group mb-3">
+                  <label for="firstName" class="form-label">
+                    <i class="fas fa-user"></i>
+                    First Name
+                  </label>
+                  <input type="text"
+                         id="firstName"
+                         class="form-control"
+                         [(ngModel)]="registerData.firstName"
+                         name="firstName"
+                         placeholder="Enter your first name"
+                         required
+                         minlength="2">
+                  <div class="invalid-feedback"
+                       *ngIf="registerForm.submitted && registerForm.controls['firstName']?.invalid">
+                    First name is required (min 2 characters).
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group mb-3">
+                  <label for="lastName" class="form-label">
+                    <i class="fas fa-user"></i>
+                    Last Name
+                  </label>
+                  <input type="text"
+                         id="lastName"
+                         class="form-control"
+                         [(ngModel)]="registerData.lastName"
+                         name="lastName"
+                         placeholder="Enter your last name"
+                         required
+                         minlength="2">
+                  <div class="invalid-feedback"
+                       *ngIf="registerForm.submitted && registerForm.controls['lastName']?.invalid">
+                    Last name is required (min 2 characters).
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group mb-3">
+              <label for="email" class="form-label">
+                <i class="fas fa-envelope"></i>
+                Email Address
+              </label>
+              <input type="email"
+                     id="email"
+                     class="form-control"
+                     [(ngModel)]="registerData.email"
+                     name="email"
+                     placeholder="Enter your email"
+                     required
+                     email>
+              <div class="invalid-feedback"
+                   *ngIf="registerForm.submitted && registerForm.controls['email']?.invalid">
+                Please enter a valid email address.
+              </div>
+            </div>
+
+            <div class="form-group mb-3">
+              <label for="phone" class="form-label">
+                <i class="fas fa-phone"></i>
+                Phone Number
+              </label>
+              <input type="tel"
+                     id="phone"
+                     class="form-control"
+                     [(ngModel)]="registerData.phone"
+                     name="phone"
+                     placeholder="Enter your phone number"
+                     required
+                     pattern="[0-9\-\+\s\(\)]+">
+              <div class="invalid-feedback"
+                   *ngIf="registerForm.submitted && registerForm.controls['phone']?.invalid">
+                Please enter a valid phone number.
+              </div>
+            </div>
+
+            <div class="form-group mb-3">
+              <label for="password" class="form-label">
+                <i class="fas fa-lock"></i>
+                Password
+              </label>
+              <div class="password-input">
+                <input [type]="showPassword ? 'text' : 'password'"
+                       id="password"
+                       class="form-control"
+                       [(ngModel)]="registerData.password"
+                       name="password"
+                       placeholder="Create a password"
+                       required
+                       minlength="8"
+                       pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$">
+                <button type="button"
+                        class="password-toggle"
+                        (click)="togglePassword()">
+                  <i [class]="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+                </button>
+              </div>
+              <div class="password-requirements">
+                <small>Password must contain at least 8 characters, including uppercase, lowercase, number, and special character.</small>
+              </div>
+              <div class="invalid-feedback"
+                   *ngIf="registerForm.submitted && registerForm.controls['password']?.invalid">
+                Password does not meet requirements.
+              </div>
+            </div>
+
+            <div class="form-group mb-3">
+              <label for="confirmPassword" class="form-label">
+                <i class="fas fa-lock"></i>
+                Confirm Password
+              </label>
+              <div class="password-input">
+                <input [type]="showConfirmPassword ? 'text' : 'password'"
+                       id="confirmPassword"
+                       class="form-control"
+                       [(ngModel)]="registerData.confirmPassword"
+                       name="confirmPassword"
+                       placeholder="Confirm your password"
+                       required>
+                <button type="button"
+                        class="password-toggle"
+                        (click)="toggleConfirmPassword()">
+                  <i [class]="showConfirmPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+                </button>
+              </div>
+              <div class="invalid-feedback"
+                   *ngIf="registerForm.submitted && !passwordsMatch()">
+                Passwords do not match.
+              </div>
+            </div>
+
+            <div class="form-group mb-4">
+              <div class="form-check">
+                <input type="checkbox"
+                       class="form-check-input"
+                       id="agreeTerms"
+                       [(ngModel)]="registerData.agreeTerms"
+                       name="agreeTerms"
+                       required>
+                <label class="form-check-label" for="agreeTerms">
+                  I agree to the <a href="#" class="auth-link">Terms of Service</a> and
+                  <a href="#" class="auth-link">Privacy Policy</a>
+                </label>
+              </div>
+              <div class="invalid-feedback"
+                   *ngIf="registerForm.submitted && registerForm.controls['agreeTerms']?.invalid">
+                You must agree to the terms and conditions.
+              </div>
+            </div>
+
+            <div class="form-group mb-4">
+              <div class="form-check">
+                <input type="checkbox"
+                       class="form-check-input"
+                       id="newsletter"
+                       [(ngModel)]="registerData.newsletter"
+                       name="newsletter">
+                <label class="form-check-label" for="newsletter">
+                  Subscribe to our newsletter for exclusive offers and updates
+                </label>
+              </div>
+            </div>
+
+            <button type="submit"
+                    class="btn btn-primary w-100 mb-3"
+                    [disabled]="!registerForm.valid || !passwordsMatch()">
+              <i class="fas fa-user-plus"></i>
+              Create Account
+            </button>
+
+            <div class="divider">
+              <span>or</span>
+            </div>
+
+            <div class="social-login">
+              <button type="button" class="btn btn-social btn-google">
+                <i class="fab fa-google"></i>
+                Sign up with Google
+              </button>
+              <button type="button" class="btn btn-social btn-facebook">
+                <i class="fab fa-facebook-f"></i>
+                Sign up with Facebook
+              </button>
+            </div>
+
+            <div class="auth-footer">
+              <p>Already have an account?
+                <a routerLink="/login" class="auth-link">Sign in here</a>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Background Animation -->
+  <div class="auth-bg">
+    <div class="floating-car car-1">
+      <i class="fas fa-car"></i>
+    </div>
+    <div class="floating-car car-2">
+      <i class="fas fa-car-side"></i>
+    </div>
+    <div class="floating-car car-3">
+      <i class="fas fa-truck"></i>
+    </div>
+  </div>
+</div>
+

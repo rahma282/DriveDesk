@@ -1,0 +1,196 @@
+<div class="catalog-container">
+  <div class="container">
+    <!-- Page Header -->
+    <div class="page-header text-center py-5">
+      <h1 class="page-title fade-in-up">Our Collection</h1>
+      <p class="page-subtitle fade-in-up">Discover the world's most prestigious vehicles</p>
+    </div>
+    
+    <!-- Filters -->
+    <div class="filters-section mb-5">
+      <div class="row align-items-center">
+        <div class="col-lg-8">
+          <div class="filter-buttons">
+            <button class="btn filter-btn" 
+                    [class.active]="selectedCategory === 'all'"
+                    (click)="filterByCategory('all')">
+              All Cars
+            </button>
+            <button class="btn filter-btn" 
+                    [class.active]="selectedCategory === 'luxury'"
+                    (click)="filterByCategory('luxury')">
+              Luxury
+            </button>
+            <button class="btn filter-btn" 
+                    [class.active]="selectedCategory === 'exotic'"
+                    (click)="filterByCategory('exotic')">
+              Exotic
+            </button>
+            <button class="btn filter-btn" 
+                    [class.active]="selectedCategory === 'sports'"
+                    (click)="filterByCategory('sports')">
+              Sports
+            </button>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="search-box">
+            <input type="text" 
+                   class="form-control" 
+                   placeholder="Search cars..."
+                   [(ngModel)]="searchQuery"
+                   (input)="onSearch()">
+            <i class="fas fa-search search-icon"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Cars Grid -->
+    <div class="cars-grid">
+      <div class="row">
+        <div class="col-lg-4 col-md-6 mb-4" *ngFor="let car of filteredCars">
+          <div class="car-card fade-in-up">
+            <div class="car-image">
+              <img [src]="car.image" [alt]="car.name" class="img-fluid">
+              <div class="car-badge">{{car.category | titlecase}}</div>
+              <div class="car-overlay">
+                <button class="btn btn-primary" (click)="bookVisit(car.id)">
+                  <i class="fas fa-calendar-alt"></i>
+                  Book a Visit
+                </button>
+              </div>
+            </div>
+            <div class="car-details">
+              <div class="car-header">
+                <h4>{{car.name}}</h4>
+                <span class="car-year">{{car.year}}</span>
+              </div>
+              <p class="car-price">${{car.price | number}}</p>
+              <div class="car-specs">
+                <div class="spec-item">
+                  <i class="fas fa-tachometer-alt"></i>
+                  <span>{{car.specs.horsepower}} HP</span>
+                </div>
+                <div class="spec-item">
+                  <i class="fas fa-rocket"></i>
+                  <span>{{car.specs.acceleration}}</span>
+                </div>
+                <div class="spec-item">
+                  <i class="fas fa-gauge-high"></i>
+                  <span>{{car.specs.topSpeed}}</span>
+                </div>
+              </div>
+              <div class="car-actions">
+                <button class="btn btn-secondary btn-sm" (click)="viewDetails(car.id)">
+                  <i class="fas fa-eye"></i>
+                  View Details
+                </button>
+                <button class="btn btn-primary btn-sm" (click)="bookVisit(car.id)">
+                  <i class="fas fa-calendar-check"></i>
+                  Book Visit
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- No Results -->
+      <div class="no-results text-center py-5" *ngIf="filteredCars.length === 0">
+        <i class="fas fa-search fa-3x mb-3"></i>
+        <h3>No cars found</h3>
+        <p>Try adjusting your search or filter criteria.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Booking Modal -->
+<div class="modal fade" id="bookingModal" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Book a Visit</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="onBooking()" #bookingForm="ngForm">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group mb-3">
+                <label class="form-label">Full Name</label>
+                <input type="text" 
+                       class="form-control" 
+                       [(ngModel)]="bookingData.customerName"
+                       name="customerName"
+                       required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group mb-3">
+                <label class="form-label">Email</label>
+                <input type="email" 
+                       class="form-control" 
+                       [(ngModel)]="bookingData.customerEmail"
+                       name="customerEmail"
+                       required>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group mb-3">
+                <label class="form-label">Phone</label>
+                <input type="tel" 
+                       class="form-control" 
+                       [(ngModel)]="bookingData.customerPhone"
+                       name="customerPhone"
+                       required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group mb-3">
+                <label class="form-label">Preferred Date</label>
+                <input type="date" 
+                       class="form-control" 
+                       [(ngModel)]="bookingData.preferredDate"
+                       name="preferredDate"
+                       [min]="minDate"
+                       required>
+              </div>
+            </div>
+          </div>
+          <div class="form-group mb-3">
+            <label class="form-label">Preferred Time</label>
+            <select class="form-control" 
+                    [(ngModel)]="bookingData.preferredTime"
+                    name="preferredTime"
+                    required>
+              <option value="">Select Time</option>
+              <option *ngFor="let slot of availableTimeSlots" [value]="slot">
+                {{slot}}
+              </option>
+            </select>
+          </div>
+          <div class="form-group mb-3">
+            <label class="form-label">Message (Optional)</label>
+            <textarea class="form-control" 
+                      rows="3"
+                      [(ngModel)]="bookingData.message"
+                      name="message"
+                      placeholder="Any special requests or questions..."></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-primary" (click)="onBooking()">
+          <i class="fas fa-calendar-check"></i>
+          Confirm Booking
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+

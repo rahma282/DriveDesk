@@ -1,0 +1,185 @@
+<div class="contact-container">
+  <div class="container">
+    <!-- Page Header -->
+    <div class="contact-hero text-center py-5">
+      <h1 class="page-title fade-in-up">Contact Us</h1>
+      <p class="page-subtitle fade-in-up">Get in touch with our team of automotive experts</p>
+    </div>
+
+    <!-- Contact Content -->
+    <div class="row">
+      <!-- Contact Information -->
+      <div class="col-lg-4 mb-5">
+        <div class="contact-info-card fade-in-left">
+          <h3>Visit Our Showroom</h3>
+          <div class="contact-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <div>
+              <h5>Address</h5>
+              <p>123 Luxury Drive<br>Elite City, EC 12345<br>United States</p>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <i class="fas fa-phone"></i>
+            <div>
+              <h5>Phone</h5>
+              <p>+1 (555) 123-4567</p>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <i class="fas fa-envelope"></i>
+            <div>
+              <h5>Email</h5>
+              <p>info&#64;DriveDesk.com</p>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <i class="fas fa-clock"></i>
+            <div>
+              <h5>Hours</h5>
+              <p>Monday - Friday: 9:00 AM - 8:00 PM<br>
+                 Saturday: 9:00 AM - 6:00 PM<br>
+                 Sunday: 12:00 PM - 5:00 PM</p>
+            </div>
+          </div>
+
+          <div class="social-links">
+            <h5>Follow Us</h5>
+            <div class="social-icons">
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-youtube"></i></a>
+              <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact Form -->
+      <div class="col-lg-8">
+        <div class="contact-form-card fade-in-right">
+          <h3>Send Us a Message</h3>
+          <form (ngSubmit)="onSubmit()" #contactForm="ngForm">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group mb-3">
+                  <label for="firstName" class="form-label">First Name</label>
+                  <input type="text"
+                         id="firstName"
+                         class="form-control"
+                         [(ngModel)]="contactData.firstName"
+                         name="firstName"
+                         required>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group mb-3">
+                  <label for="lastName" class="form-label">Last Name</label>
+                  <input type="text"
+                         id="lastName"
+                         class="form-control"
+                         [(ngModel)]="contactData.lastName"
+                         name="lastName"
+                         required>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group mb-3">
+                  <label for="email" class="form-label">Email Address</label>
+                  <input type="email"
+                         id="email"
+                         class="form-control"
+                         [(ngModel)]="contactData.email"
+                         name="email"
+                         required>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group mb-3">
+                  <label for="phone" class="form-label">Phone Number</label>
+                  <input type="tel"
+                         id="phone"
+                         class="form-control"
+                         [(ngModel)]="contactData.phone"
+                         name="phone">
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group mb-3">
+              <label for="subject" class="form-label">Subject</label>
+              <select id="subject"
+                      class="form-control"
+                      [(ngModel)]="contactData.subject"
+                      name="subject"
+                      required>
+                <option value="">Select a subject</option>
+                <option value="general">General Inquiry</option>
+                <option value="booking">Schedule a Visit</option>
+                <option value="purchase">Purchase Inquiry</option>
+                <option value="service">Service Request</option>
+                <option value="financing">Financing Options</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div class="form-group mb-4">
+              <label for="message" class="form-label">Message</label>
+              <textarea id="message"
+                        class="form-control"
+                        rows="5"
+                        [(ngModel)]="contactData.message"
+                        name="message"
+                        placeholder="Tell us how we can help you..."
+                        required></textarea>
+            </div>
+
+            <div class="form-group mb-4">
+              <div class="form-check">
+                <input type="checkbox"
+                       class="form-check-input"
+                       id="newsletter"
+                       [(ngModel)]="contactData.newsletter"
+                       name="newsletter">
+                <label class="form-check-label" for="newsletter">
+                  Subscribe to our newsletter for exclusive offers and updates
+                </label>
+              </div>
+            </div>
+
+            <button type="submit"
+                    class="btn btn-primary btn-lg"
+                    [disabled]="!contactForm.valid">
+              <i class="fas fa-paper-plane"></i>
+              Send Message
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Map Section -->
+    <div class="map-section py-5">
+      <h3 class="text-center mb-4">Find Our Showroom</h3>
+      <div class="map-container">
+        <div class="map-placeholder">
+          <i class="fas fa-map-marked-alt"></i>
+          <h4>Interactive Map</h4>
+          <p>123 Luxury Drive, Elite City, EC 12345</p>
+          <a href="https://maps.google.com" target="_blank" class="btn btn-secondary">
+            <i class="fas fa-external-link-alt"></i>
+            Open in Google Maps
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

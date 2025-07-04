@@ -1,0 +1,208 @@
+<!-- Hero Section -->
+<section class="hero-section">
+  <div class="hero-carousel">
+    <div class="carousel-container">
+      <div
+        class="carousel-slide"
+        *ngFor="let car of featuredCars; let i = index"
+        [class.active]="i === currentSlide"
+        [style.background-image]="'url(' + car.image + ')'"
+      >
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+          <div class="container">
+            <div class="row align-items-center min-vh-100">
+
+              <!-- Left: Hero Text and Quick Booking -->
+              <div class="col-lg-6">
+                <div class="hero-text fade-in-left">
+                  <h1 class="hero-title">Book Your Visit</h1>
+                  <h2 class="hero-subtitle">Experience Luxury Like Never Before</h2>
+                  <p class="hero-description">
+                    Discover the world's most prestigious vehicles in our exclusive showroom.
+                    Schedule your private viewing today and drive your dream car.
+                  </p>
+
+                  <!-- Quick Booking Form -->
+                  <div class="quick-booking-form">
+                    <h4>Quick Booking</h4>
+                    <form (ngSubmit)="onQuickBooking()" #quickBookingForm="ngForm">
+                      <div class="row g-3">
+                        <div class="col-md-6">
+                          <input
+                            type="date"
+                            class="form-control"
+                            [(ngModel)]="quickBooking.date"
+                            name="date"
+                            [min]="minDate"
+                            required
+                          />
+                        </div>
+                        <div class="col-md-6">
+                          <select
+                            class="form-control"
+                            [(ngModel)]="quickBooking.time"
+                            name="time"
+                            required
+                          >
+                            <option value="">Select Time</option>
+                            <option *ngFor="let slot of availableTimeSlots" [value]="slot">
+                              {{ slot }}
+                            </option>
+                          </select>
+                        </div>
+                        <div class="col-12">
+                          <button
+                            type="submit"
+                            class="btn btn-primary btn-lg w-100"
+                            [disabled]="!quickBookingForm.valid"
+                          >
+                            <i class="fas fa-calendar-check"></i>
+                            Book Showroom Visit
+                          </button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right: Car Info -->
+              <div class="col-lg-6">
+                <div class="hero-car-info fade-in-right">
+                  <div class="car-info-card" *ngIf="featuredCars[currentSlide]">
+                    <h3>{{ featuredCars[currentSlide]?.name }}</h3>
+                    <p class="car-price">${{ featuredCars[currentSlide]?.price | number }}</p>
+                    <div class="car-specs">
+                      <div class="spec-item">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>{{ featuredCars[currentSlide].specs.horsepower }} HP</span>
+                      </div>
+                      <div class="spec-item">
+                        <i class="fas fa-rocket"></i>
+                        <span>{{ featuredCars[currentSlide].specs.acceleration }}</span>
+                      </div>
+                      <div class="spec-item">
+                        <i class="fas fa-gauge-high"></i>
+                        <span>{{ featuredCars[currentSlide].specs.topSpeed }}</span>
+                      </div>
+                    </div>
+                    <button
+                      class="btn btn-secondary"
+                      (click)="bookVisit(featuredCars[currentSlide].id)"
+                    >
+                      <i class="fas fa-eye"></i>
+                      View Details
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Carousel Controls -->
+    <div class="carousel-controls">
+      <button class="carousel-btn prev" (click)="previousSlide()">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <button class="carousel-btn next" (click)="nextSlide()">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
+
+    <!-- Carousel Indicators -->
+    <div class="carousel-indicators">
+      <button
+        *ngFor="let car of featuredCars; let i = index"
+        [class.active]="i === currentSlide"
+        (click)="goToSlide(i)"
+      ></button>
+    </div>
+  </div>
+</section>
+
+<!-- Featured Cars Section -->
+<section class="featured-cars-section py-5">
+  <div class="container">
+    <!-- Title -->
+    <div class="row">
+      <div class="col-12 text-center mb-5">
+        <h2 class="section-title fade-in-up">Featured Collection</h2>
+        <p class="section-subtitle fade-in-up">
+          Explore our handpicked selection of luxury and exotic vehicles
+        </p>
+      </div>
+    </div>
+
+    <!-- Featured Cars -->
+    <div class="row">
+      <div class="col-lg-3 col-md-6 mb-4" *ngFor="let car of featuredCars">
+        <div class="car-card fade-in-up">
+          <div class="car-image">
+            <img [src]="car.image" [alt]="car.name" class="img-fluid" />
+            <div class="car-overlay">
+              <button class="btn btn-primary" (click)="bookVisit(car.id)">
+                <i class="fas fa-calendar-alt"></i>
+                Book a Visit
+              </button>
+            </div>
+          </div>
+          <div class="car-details">
+            <h4>{{ car.name }}</h4>
+            <p class="car-category">{{ car.category | titlecase }}</p>
+            <div class="car-specs-mini">
+              <span>
+                <i class="fas fa-tachometer-alt"></i>
+                {{ car.specs.horsepower }} HP
+              </span>
+              <span>
+                <i class="fas fa-calendar"></i>
+                {{ car.year }}
+              </span>
+            </div>
+            <div class="car-price-action">
+              <span class="price">${{ car.price | number }}</span>
+              <button class="btn btn-secondary btn-sm" routerLink="/catalog">
+                View Details
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- View Catalog CTA -->
+    <div class="row">
+      <div class="col-12 text-center">
+        <a routerLink="/catalog" class="btn btn-primary btn-lg">
+          <i class="fas fa-car"></i>
+          View Full Catalog
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Call to Action Section -->
+<section class="cta-section py-5">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-8">
+        <h3 class="cta-title">Ready to Experience Luxury?</h3>
+        <p class="cta-description">
+          Schedule your private showroom visit today and discover the perfect vehicle for your lifestyle.
+        </p>
+      </div>
+      <div class="col-lg-4 text-lg-end">
+        <a routerLink="/contact" class="btn btn-primary btn-lg">
+          <i class="fas fa-phone"></i>
+          Contact Us Now
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

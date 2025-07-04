@@ -1,0 +1,39 @@
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top custom-navbar">
+  <div class="container">
+    <a class="navbar-brand" routerLink="/">
+      <i class="fas fa-car-side"></i>
+      <span class="brand-text">DriveDesk</span>
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/catalog" routerLinkActive="active">Catalog</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/about" routerLinkActive="active">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/contact" routerLinkActive="active">Contact</a>
+        </li>
+      </ul>
+
+      <div class="navbar-nav">
+        <a class="nav-link login-link" routerLink="/login">
+          <i class="fas fa-sign-in-alt"></i> Login
+        </a>
+        <a class="btn btn-primary ms-2" routerLink="/register">
+          <i class="fas fa-user-plus"></i> Register
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
+

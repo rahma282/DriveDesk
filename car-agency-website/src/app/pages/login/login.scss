@@ -1,0 +1,353 @@
+.auth-container {
+  background: linear-gradient(135deg, var(--primary-bg), var(--secondary-bg));
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  padding-top: 80px; // Offset for fixed navbar
+}
+
+.auth-card {
+  background: rgba(17, 17, 17, 0.95);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 3rem;
+  backdrop-filter: blur(15px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 2;
+}
+
+.auth-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-blue), var(--accent-red), var(--accent-orange));
+  border-radius: 20px 20px 0 0;
+}
+
+.auth-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.auth-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.auth-logo i {
+  color: var(--accent-blue);
+  font-size: 2rem;
+}
+
+.brand-text {
+  background: linear-gradient(45deg, var(--accent-blue), var(--accent-red));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.auth-header h2 {
+  color: var(--text-primary);
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.auth-header p {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  margin-bottom: 0;
+}
+
+.auth-form {
+  margin-top: 2rem;
+}
+
+.form-label {
+  color: var(--text-primary);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.form-label i {
+  color: var(--accent-blue);
+  width: 16px;
+}
+
+.form-control {
+  background: var(--tertiary-bg);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  border-radius: 10px;
+  padding: 15px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus {
+  background: var(--secondary-bg);
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 0.2rem rgba(0, 212, 255, 0.25);
+  color: var(--text-primary);
+}
+
+.form-control::placeholder {
+  color: var(--text-muted);
+}
+
+.password-input {
+  position: relative;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.3s ease;
+}
+
+.password-toggle:hover {
+  color: var(--accent-blue);
+}
+
+.form-check {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.form-check-input {
+  background: var(--tertiary-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  width: 18px;
+  height: 18px;
+}
+
+.form-check-input:checked {
+  background: var(--accent-blue);
+  border-color: var(--accent-blue);
+}
+
+.form-check-label {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.forgot-password {
+  color: var(--accent-blue);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+
+.forgot-password:hover {
+  color: var(--accent-red);
+  text-decoration: underline;
+}
+
+.divider {
+  position: relative;
+  text-align: center;
+  margin: 1.5rem 0;
+}
+
+.divider::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--border-color);
+}
+
+.divider span {
+  background: rgba(17, 17, 17, 0.95);
+  color: var(--text-muted);
+  padding: 0 1rem;
+  font-size: 0.9rem;
+  position: relative;
+  z-index: 1;
+}
+
+.social-login {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.btn-social {
+  background: var(--tertiary-bg);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 12px;
+  border-radius: 10px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.btn-social:hover {
+  background: var(--secondary-bg);
+  border-color: var(--accent-blue);
+  color: var(--text-primary);
+  transform: translateY(-2px);
+}
+
+.btn-google:hover {
+  border-color: #db4437;
+}
+
+.btn-facebook:hover {
+  border-color: #4267b2;
+}
+
+.btn-google i {
+  color: #db4437;
+}
+
+.btn-facebook i {
+  color: #4267b2;
+}
+
+.auth-footer {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.auth-footer p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.auth-link {
+  color: var(--accent-blue);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.auth-link:hover {
+  color: var(--accent-red);
+  text-decoration: underline;
+}
+
+.invalid-feedback {
+  display: block;
+  color: var(--accent-red);
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+/* Background Animation */
+.auth-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.floating-car {
+  position: absolute;
+  color: var(--accent-blue);
+  font-size: 2rem;
+  opacity: 0.1;
+  animation: float 6s ease-in-out infinite;
+}
+
+.car-1 {
+  top: 20%;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.car-2 {
+  top: 60%;
+  right: 15%;
+  animation-delay: 2s;
+  color: var(--accent-red);
+}
+
+.car-3 {
+  bottom: 20%;
+  left: 20%;
+  animation-delay: 4s;
+  color: var(--accent-orange);
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(5deg);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .auth-card {
+    padding: 2rem;
+    margin: 1rem;
+  }
+  
+  .auth-header h2 {
+    font-size: 1.5rem;
+  }
+  
+  .social-login {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 576px) {
+  .auth-card {
+    padding: 1.5rem;
+  }
+  
+  .auth-logo {
+    font-size: 1.2rem;
+  }
+  
+  .auth-logo i {
+    font-size: 1.5rem;
+  }
+  
+  .floating-car {
+    font-size: 1.5rem;
+  }
+}
+

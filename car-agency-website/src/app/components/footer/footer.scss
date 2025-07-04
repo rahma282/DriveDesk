@@ -1,0 +1,244 @@
+.custom-footer {
+  background: linear-gradient(135deg, var(--secondary-bg), var(--primary-bg));
+  border-top: 1px solid var(--border-color);
+  padding: 3rem 0 1rem;
+  margin-top: 4rem;
+  position: relative;
+}
+
+.custom-footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-blue), var(--accent-red), var(--accent-orange));
+}
+
+.footer-brand h3 {
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.footer-brand i {
+  color: var(--accent-blue);
+  font-size: 1.5rem;
+}
+
+.brand-text {
+  background: linear-gradient(45deg, var(--accent-blue), var(--accent-red));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.footer-description {
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.social-links {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: var(--tertiary-bg);
+  color: var(--text-secondary);
+  border-radius: 50%;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: 1px solid var(--border-color);
+}
+
+.social-link:hover {
+  background: var(--accent-blue);
+  color: var(--primary-bg);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 212, 255, 0.3);
+}
+
+.social-link:nth-child(2):hover {
+  background: var(--accent-red);
+  box-shadow: 0 5px 15px rgba(255, 51, 102, 0.3);
+}
+
+.social-link:nth-child(3):hover {
+  background: var(--accent-orange);
+  box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
+}
+
+.footer-title {
+  color: var(--text-primary);
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.footer-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 30px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent-blue), var(--accent-red));
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links li {
+  margin-bottom: 0.5rem;
+}
+
+.footer-links a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  position: relative;
+  padding-left: 1rem;
+}
+
+.footer-links a::before {
+  content: '▶';
+  position: absolute;
+  left: 0;
+  color: var(--accent-blue);
+  font-size: 0.7rem;
+  opacity: 0;
+  transform: translateX(-5px);
+  transition: all 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--accent-blue);
+  padding-left: 1.5rem;
+}
+
+.footer-links a:hover::before {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.contact-info {
+  margin-bottom: 1.5rem;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.contact-item i {
+  color: var(--accent-blue);
+  width: 16px;
+  text-align: center;
+}
+
+.footer-booking {
+  background: var(--tertiary-bg);
+  padding: 1rem;
+  border-radius: 10px;
+  border: 1px solid var(--border-color);
+  text-align: center;
+}
+
+.footer-booking h6 {
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+}
+
+.footer-divider {
+  border-color: var(--border-color);
+  margin: 2rem 0 1rem;
+}
+
+.copyright {
+  color: var(--text-muted);
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.legal-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1.5rem;
+}
+
+.legal-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+
+.legal-links a:hover {
+  color: var(--accent-blue);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .custom-footer {
+    padding: 2rem 0 1rem;
+  }
+  
+  .social-links {
+    justify-content: center;
+  }
+  
+  .legal-links {
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+  }
+  
+  .footer-booking {
+    margin-top: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .footer-brand h3 {
+    font-size: 1.5rem;
+    justify-content: center;
+  }
+  
+  .footer-title {
+    text-align: center;
+  }
+  
+  .footer-links {
+    text-align: center;
+  }
+  
+  .contact-info {
+    text-align: center;
+  }
+  
+  .contact-item {
+    justify-content: center;
+  }
+}
+
