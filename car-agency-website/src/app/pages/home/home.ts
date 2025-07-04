@@ -10,7 +10,7 @@ import { BookingService } from '../../services/booking';
   selector: 'app-home',
   imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './home.html',
-  styleUrl: './home.scss'
+  styleUrl: './home.css'
 })
 export class HomeComponent implements OnInit, OnDestroy {
   featuredCars: Car[] = [];
@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   carouselInterval: any;
   availableTimeSlots: string[] = [];
   minDate: string;
-  
+
   quickBooking = {
     date: '',
     time: ''
@@ -69,8 +69,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   previousSlide(): void {
-    this.currentSlide = this.currentSlide === 0 
-      ? this.featuredCars.length - 1 
+    this.currentSlide = this.currentSlide === 0
+      ? this.featuredCars.length - 1
       : this.currentSlide - 1;
   }
 
@@ -83,7 +83,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       // For demo purposes, we'll just show an alert
       // In a real app, this would open a detailed booking form
       alert(`Booking request for ${this.quickBooking.date} at ${this.quickBooking.time}. Please complete your details in the catalog section.`);
-      
+
       // Reset form
       this.quickBooking = { date: '', time: '' };
     }

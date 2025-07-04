@@ -1,9 +1,8 @@
-/* Hero Section */
 .hero-section {
   position: relative;
   height: 100vh;
-  overflow: hidden;
-  margin-top: -80px; // Offset for fixed navbar
+  overflow: visible;
+  margin-top: -80px;
   padding-top: 80px;
 }
 
@@ -30,10 +29,10 @@
   background-repeat: no-repeat;
   opacity: 0;
   transition: opacity 1s ease-in-out;
+}
 
-  &.active {
-    opacity: 1;
-  }
+.carousel-slide.active {
+  opacity: 1;
 }
 
 .hero-overlay {
@@ -42,12 +41,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    135deg,
-    rgba(0, 0, 0, 0.8) 0%,
-    rgba(0, 0, 0, 0.4) 50%,
-    rgba(0, 0, 0, 0.8) 100%
-  );
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.8) 100%);
 }
 
 .hero-content {
@@ -85,7 +79,6 @@
   line-height: 1.6;
 }
 
-/* Quick Booking Form */
 .quick-booking-form {
   background: rgba(0, 0, 0, 0.8);
   padding: 2rem;
@@ -93,6 +86,7 @@
   border: 1px solid var(--border-color);
   backdrop-filter: blur(10px);
   margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 .quick-booking-form h4 {
@@ -101,7 +95,13 @@
   text-align: center;
 }
 
-/* Hero Car Info */
+@media (max-width: 768px) {
+  .quick-booking-form {
+    padding: 1.5rem;
+    margin: 2rem;
+  }
+}
+
 .hero-car-info {
   display: flex;
   justify-content: center;
@@ -152,7 +152,6 @@
   font-size: 1.2rem;
 }
 
-/* Carousel Controls */
 .carousel-controls {
   position: absolute;
   top: 50%;
@@ -185,7 +184,6 @@
   transform: scale(1.1);
 }
 
-/* Carousel Indicators */
 .carousel-indicators {
   position: absolute;
   bottom: 2rem;
@@ -211,7 +209,6 @@
   transform: scale(1.2);
 }
 
-/* Featured Cars Section */
 .featured-cars-section {
   background: var(--secondary-bg);
   padding: 5rem 0;
@@ -234,7 +231,6 @@
   margin-bottom: 3rem;
 }
 
-/* Car Cards */
 .car-card {
   background: var(--tertiary-bg);
   border-radius: 15px;
@@ -333,7 +329,6 @@
   color: var(--accent-blue);
 }
 
-/* CTA Section */
 .cta-section {
   background: linear-gradient(135deg, var(--primary-bg), var(--secondary-bg));
   border-top: 1px solid var(--border-color);
@@ -352,7 +347,7 @@
   margin-bottom: 0;
 }
 
-/* Responsive Design */
+/* Responsive */
 @media (max-width: 992px) {
   .hero-title {
     font-size: 3rem;
@@ -437,4 +432,3 @@
     font-size: 2rem;
   }
 }
-
