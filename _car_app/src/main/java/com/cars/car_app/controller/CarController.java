@@ -3,6 +3,7 @@ package com.cars.car_app.controller;
 import com.cars.car_app.model.Car;
 import com.cars.car_app.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,5 +35,12 @@ public class CarController {
     @DeleteMapping("/{id}")
     public void deleteCar(@PathVariable Long id) {
         carService.deleteCar(id);
+    }
+
+    // PATCH /api/cars/{id}
+    @PatchMapping("/{id}")
+    public ResponseEntity<Car> updateCar(@PathVariable Long id, @RequestBody Car updatedCar) {
+        Car car = carService.updateCar(id, updatedCar);
+        return ResponseEntity.ok(car);
     }
 }

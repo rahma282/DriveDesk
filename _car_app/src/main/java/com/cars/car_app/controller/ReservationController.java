@@ -5,7 +5,9 @@ import com.cars.car_app.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -39,5 +41,18 @@ public class ReservationController {
     @DeleteMapping("/{id}")
     public void deleteReservation(@PathVariable Long id) {
         reservationService.deleteReservation(id);
+    }
+
+    // PATCH /api/reservations/{id}
+    @PatchMapping("/{id}")
+    public Reservation updateReservation(
+            @PathVariable Long id,
+            @RequestBody Map<String, Object> updates
+    ) {
+        Long carId = Long.valueOf(updates.get("carId").toString());
+        Long userId = Long.valueOf(updates.get("userId").toString());
+        LocalDate reservationDate = LocalDate.parse(updates.get("reservationDate").toString());
+
+        return reservationService.updateReservation(id, carId, userId, reservationDate);
     }
 }

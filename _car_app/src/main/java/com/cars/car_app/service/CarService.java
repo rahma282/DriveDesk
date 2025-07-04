@@ -29,4 +29,16 @@ public class CarService {
     public void deleteCar(Long id) {
         carRepository.deleteById(id);
     }
+
+     public Car updateCar(Long id, Car updatedCar) {
+        return carRepository.findById(id)
+                .map(existingCar -> {
+                    existingCar.setBrand(updatedCar.getBrand());
+                    existingCar.setModel(updatedCar.getModel());
+                    existingCar.setPrice(updatedCar.getPrice());
+                    existingCar.setYear(updatedCar.getYear());
+                    return carRepository.save(existingCar);
+                })
+                .orElseThrow(() -> new RuntimeException("Car not found with ID: " + id));
+    }
 }

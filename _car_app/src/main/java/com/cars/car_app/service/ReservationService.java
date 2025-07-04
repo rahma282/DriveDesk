@@ -25,22 +25,18 @@ public class ReservationService {
     @Autowired
     private UserRepository userRepository;
 
-    // Get all reservations
     public List<Reservation> getAllReservations() {
         return reservationRepository.findAll();
     }
 
-    // Get reservation by ID
     public Optional<Reservation> getReservationById(Long id) {
         return reservationRepository.findById(id);
     }
 
-    // Get all reservations for a specific user
     public List<Reservation> getReservationsByUserId(Long userId) {
         return reservationRepository.findByUserId(userId);
     }
 
-    // Save reservation (with conflict check)
     public Reservation saveReservation(Reservation reservation) {
         boolean exists = reservationRepository.existsByCarAndReservationDate(
                 reservation.getCar(), reservation.getReservationDate()
@@ -53,7 +49,6 @@ public class ReservationService {
         return reservationRepository.save(reservation);
     }
 
-    // Alternative: Create reservation using carId, userId, and date
     public Reservation createReservation(Long carId, Long userId, LocalDate reservationDate) {
         Car car = carRepository.findById(carId)
                 .orElseThrow(() -> new RuntimeException("Car not found"));
@@ -66,17 +61,39 @@ public class ReservationService {
             throw new IllegalStateException("Car is already reserved on this date.");
         }
 
-        Reservation reservation = Reservation.builder()
-                .car(car)
-                .user(user)
-                .reservationDate(reservationDate)
-                .build();
+        Reservation reservation = new Reservation();
+        reservation.setCar(car);
+        reservation.setUser(user);
+        reservation.setReservationDate(reservationDate);
 
         return reservationRepository.save(reservation);
     }
 
-    // Delete reservation
     public void deleteReservation(Long id) {
         reservationRepository.deleteById(id);
+    }
+
+    // ✅ PATCH / update reservation
+    public Reservation updateReservation(Long reservationId, Long newCarId, Long newUserId, LocalDate newDate) {
+        Reservation reservation = reservationRepository.findById(reservationId)
+                .orElseThrow(() -> new RuntimeException("Reservation not found"));
+
+        Car car = carRepository.findById(newCarId)
+                .orElseThrow(() -> new RuntimeException("Car not found"));
+
+        User user = userRepository.findById(newUserId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        // Check if the new date for the same car is already reserved by someone else
+        boolean conflict = reservationRepository.existsByCarAndReservationDate(car, newDate);
+        if (conflict && !(car.getId() == reservation.getCar().getId() && newDate.equals(reservation.getReservationDate()))) {
+            throw new IllegalStateException("Car is already reserved on this date.");
+        }
+
+        reservation.setCar(car);
+        reservation.setUser(user);
+        reservation.setReservationDate(newDate);
+
+        return reservationRepository.save(reservation);
     }
 }
