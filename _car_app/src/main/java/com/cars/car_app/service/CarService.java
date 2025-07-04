@@ -37,6 +37,7 @@ public class CarService {
                     existingCar.setModel(updatedCar.getModel());
                     existingCar.setPrice(updatedCar.getPrice());
                     existingCar.setYear(updatedCar.getYear());
+                    existingCar.setImageUrl(updatedCar.getImageUrl());
                     return carRepository.save(existingCar);
                 })
                 .orElseThrow(() -> new RuntimeException("Car not found with ID: " + id));
