@@ -5,28 +5,28 @@
       <h1 class="page-title fade-in-up">Our Collection</h1>
       <p class="page-subtitle fade-in-up">Discover the world's most prestigious vehicles</p>
     </div>
-    
+
     <!-- Filters -->
     <div class="filters-section mb-5">
       <div class="row align-items-center">
         <div class="col-lg-8">
           <div class="filter-buttons">
-            <button class="btn filter-btn" 
+            <button class="btn filter-btn"
                     [class.active]="selectedCategory === 'all'"
                     (click)="filterByCategory('all')">
               All Cars
             </button>
-            <button class="btn filter-btn" 
+            <button class="btn filter-btn"
                     [class.active]="selectedCategory === 'luxury'"
                     (click)="filterByCategory('luxury')">
               Luxury
             </button>
-            <button class="btn filter-btn" 
+            <button class="btn filter-btn"
                     [class.active]="selectedCategory === 'exotic'"
                     (click)="filterByCategory('exotic')">
               Exotic
             </button>
-            <button class="btn filter-btn" 
+            <button class="btn filter-btn"
                     [class.active]="selectedCategory === 'sports'"
                     (click)="filterByCategory('sports')">
               Sports
@@ -35,8 +35,8 @@
         </div>
         <div class="col-lg-4">
           <div class="search-box">
-            <input type="text" 
-                   class="form-control" 
+            <input type="text"
+                   class="form-control"
                    placeholder="Search cars..."
                    [(ngModel)]="searchQuery"
                    (input)="onSearch()">
@@ -45,14 +45,14 @@
         </div>
       </div>
     </div>
-    
+
     <!-- Cars Grid -->
     <div class="cars-grid">
       <div class="row">
         <div class="col-lg-4 col-md-6 mb-4" *ngFor="let car of filteredCars">
           <div class="car-card fade-in-up">
             <div class="car-image">
-              <img [src]="car.image" [alt]="car.name" class="img-fluid">
+              <img [src]="car.imageUrl" [alt]="car.name" class="img-fluid">
               <div class="car-badge">{{car.category | titlecase}}</div>
               <div class="car-overlay">
                 <button class="btn btn-primary" (click)="bookVisit(car.id)">
@@ -95,7 +95,7 @@
           </div>
         </div>
       </div>
-      
+
       <!-- No Results -->
       <div class="no-results text-center py-5" *ngIf="filteredCars.length === 0">
         <i class="fas fa-search fa-3x mb-3"></i>
@@ -120,8 +120,8 @@
             <div class="col-md-6">
               <div class="form-group mb-3">
                 <label class="form-label">Full Name</label>
-                <input type="text" 
-                       class="form-control" 
+                <input type="text"
+                       class="form-control"
                        [(ngModel)]="bookingData.customerName"
                        name="customerName"
                        required>
@@ -130,8 +130,8 @@
             <div class="col-md-6">
               <div class="form-group mb-3">
                 <label class="form-label">Email</label>
-                <input type="email" 
-                       class="form-control" 
+                <input type="email"
+                       class="form-control"
                        [(ngModel)]="bookingData.customerEmail"
                        name="customerEmail"
                        required>
@@ -142,8 +142,8 @@
             <div class="col-md-6">
               <div class="form-group mb-3">
                 <label class="form-label">Phone</label>
-                <input type="tel" 
-                       class="form-control" 
+                <input type="tel"
+                       class="form-control"
                        [(ngModel)]="bookingData.customerPhone"
                        name="customerPhone"
                        required>
@@ -152,8 +152,8 @@
             <div class="col-md-6">
               <div class="form-group mb-3">
                 <label class="form-label">Preferred Date</label>
-                <input type="date" 
-                       class="form-control" 
+                <input type="date"
+                       class="form-control"
                        [(ngModel)]="bookingData.preferredDate"
                        name="preferredDate"
                        [min]="minDate"
@@ -163,7 +163,7 @@
           </div>
           <div class="form-group mb-3">
             <label class="form-label">Preferred Time</label>
-            <select class="form-control" 
+            <select class="form-control"
                     [(ngModel)]="bookingData.preferredTime"
                     name="preferredTime"
                     required>
@@ -175,7 +175,7 @@
           </div>
           <div class="form-group mb-3">
             <label class="form-label">Message (Optional)</label>
-            <textarea class="form-control" 
+            <textarea class="form-control"
                       rows="3"
                       [(ngModel)]="bookingData.message"
                       name="message"

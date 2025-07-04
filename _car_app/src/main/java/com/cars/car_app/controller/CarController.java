@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/cars")
-@CrossOrigin(origins = "http://localhost:4200") // Allows requests from Angular frontend
+@CrossOrigin(origins = "http://localhost:4200")
 public class CarController {
 
     @Autowired
@@ -23,21 +23,24 @@ public class CarController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Car> getCarById(@PathVariable Long id) {
-        return carService.getCarById(id);
+    public ResponseEntity<Car> getCarById(@PathVariable Long id) {
+        return carService.getCarById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public Car createCar(@RequestBody Car car) {
-        return carService.saveCar(car);
+    public ResponseEntity<Car> createCar(@RequestBody Car car) {
+        Car savedCar = carService.saveCar(car);
+        return ResponseEntity.ok(savedCar);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteCar(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteCar(@PathVariable Long id) {
         carService.deleteCar(id);
+        return ResponseEntity.noContent().build();
     }
 
-    // PATCH /api/cars/{id}
     @PatchMapping("/{id}")
     public ResponseEntity<Car> updateCar(@PathVariable Long id, @RequestBody Car updatedCar) {
         Car car = carService.updateCar(id, updatedCar);

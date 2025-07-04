@@ -5,8 +5,7 @@ export interface Car {
   model: string;
   year: number;
   price: number;
-  image: string;
-  images: string[];
+  imageUrl: string;
   category: 'luxury' | 'exotic' | 'sports' | 'classic';
   specs: {
     engine: string;

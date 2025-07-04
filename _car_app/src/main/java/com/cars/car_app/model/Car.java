@@ -1,39 +1,58 @@
 package com.cars.car_app.model;
 
-import java.util.List;
 import jakarta.persistence.*;
-import lombok.*;
+import java.util.List;
 
 @Entity
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class Car {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    private String name;
 
     private String brand;
 
     private String model;
 
-    private double price;
-
     private int year;
 
+    private double price;
+
     private String imageUrl;
+
+    private String category;
+
+    private String description;
+
+    private boolean available;
+
+    @ElementCollection
+    private List<String> features;
+
+    @Embedded
+    private CarSpecs specs;
 
     @OneToMany(mappedBy = "car", cascade = CascadeType.ALL)
     private List<Reservation> reservations;
 
-    public String getModel() {
-        return model;
+    // ------------------- Getters & Setters -------------------
+
+    public long getId() {
+        return id;
     }
 
-    public void setModel(String model) {
-        this.model = model;
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getBrand() {
@@ -44,12 +63,20 @@ public class Car {
         this.brand = brand;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getModel() {
+        return model;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
     }
 
     public double getPrice() {
@@ -60,12 +87,52 @@ public class Car {
         this.price = price;
     }
 
-    public long getId() {
-        return id;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
+    }
+
+    public List<String> getFeatures() {
+        return features;
+    }
+
+    public void setFeatures(List<String> features) {
+        this.features = features;
+    }
+
+    public CarSpecs getSpecs() {
+        return specs;
+    }
+
+    public void setSpecs(CarSpecs specs) {
+        this.specs = specs;
     }
 
     public List<Reservation> getReservations() {
@@ -74,13 +141,5 @@ public class Car {
 
     public void setReservations(List<Reservation> reservations) {
         this.reservations = reservations;
-    }
-
-    public int getYear() {
-        return year;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
     }
 }

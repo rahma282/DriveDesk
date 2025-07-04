@@ -8,6 +8,7 @@ import { BookingService } from '../../services/booking';
 
 @Component({
   selector: 'app-home',
+  standalone: true,
   imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './home.html',
   styleUrl: './home.css'
@@ -28,7 +29,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     private carService: CarService,
     private bookingService: BookingService
   ) {
-    // Set minimum date to today
     const today = new Date();
     this.minDate = today.toISOString().split('T')[0];
   }
@@ -46,8 +46,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   loadFeaturedCars(): void {
-    this.carService.getFeaturedCars().subscribe(cars => {
-      this.featuredCars = cars;
+    this.carService.getAllCars().subscribe(cars => {
+      console.log('Featured Cars:', cars);
+      this.featuredCars = cars.slice(0, 4); // only first 4 as featured
     });
   }
 
@@ -61,7 +62,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   startCarousel(): void {
     this.carouselInterval = setInterval(() => {
       this.nextSlide();
-    }, 5000); // Change slide every 5 seconds
+    }, 5000);
   }
 
   nextSlide(): void {
@@ -80,19 +81,13 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   onQuickBooking(): void {
     if (this.quickBooking.date && this.quickBooking.time) {
-      // For demo purposes, we'll just show an alert
-      // In a real app, this would open a detailed booking form
       alert(`Booking request for ${this.quickBooking.date} at ${this.quickBooking.time}. Please complete your details in the catalog section.`);
-
-      // Reset form
       this.quickBooking = { date: '', time: '' };
     }
   }
 
   bookVisit(carId: number | undefined): void {
     if (carId) {
-      // For demo purposes, navigate to catalog
-      // In a real app, this would open a booking modal or navigate to a booking page
       alert(`Booking visit for car ID: ${carId}. Redirecting to catalog for more details.`);
     }
   }
@@ -101,9 +96,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     if (this.quickBooking.date) {
       this.bookingService.getAvailableTimeSlots(this.quickBooking.date).subscribe(slots => {
         this.availableTimeSlots = slots;
-        this.quickBooking.time = ''; // Reset time selection
+        this.quickBooking.time = '';
       });
     }
   }
 }
-
